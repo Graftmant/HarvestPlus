@@ -1,12 +1,14 @@
 // Renders the .dmg window background at a given scale: app name, a
-// drag-to-install arrow, and a hint line. Designed in 540x400 points with the
-// title and hint given equal padding from the top and bottom edges. Pass a
-// scale (1 or 2) to render 1x (540x400) or 2x (1080x800) for a HiDPI TIFF.
+// drag-to-install arrow, and a hint line. Designed in 600x364 points: the title
+// sits PAD below the top, and the hint is raised to sit just below the arrow
+// (HINT_PAD above the bottom). Pass a scale (1 or 2) to render 1x (600x364) or
+// 2x (1200x728) for a HiDPI TIFF.
 // Run: swift make-background.swift <output.png> [scale]
 import AppKit
 
-let W = 540.0, H = 400.0
-let PAD = 40.0   // equal gap from the top edge (to the title) and bottom edge (to the hint)
+let W = 600.0, H = 364.0
+let PAD = 40.0        // gap from the top edge to the title
+let HINT_PAD = 48.0   // gap from the bottom edge to the hint
 let outPath = CommandLine.arguments.count > 1 ? CommandLine.arguments[1] : "background.png"
 let scale = CommandLine.arguments.count > 2 ? (Double(CommandLine.arguments[2]) ?? 1.0) : 1.0
 let pw = Int(W * scale), ph = Int(H * scale)
@@ -44,21 +46,21 @@ title.draw(at: NSPoint(x: centerX(title), y: H - PAD - title.size().height))
 let hint = NSAttributedString(string: "To install, drag the app onto the Applications folder", attributes: [
     .font: NSFont.systemFont(ofSize: 12, weight: .regular),
     .foregroundColor: NSColor(white: 0.46, alpha: 1)])
-hint.draw(at: NSPoint(x: centerX(hint), y: PAD))
+hint.draw(at: NSPoint(x: centerX(hint), y: HINT_PAD))
 
-// Drag arrow, aligned with the icon row (icons sit at window-y 185 = CG-y 215)
-let y = 215.0
+// Drag arrow, aligned with the icon row (icons sit at window-y 182 = CG-y 182)
+let y = 182.0
 brand.setStroke(); brand.setFill()
 let shaft = NSBezierPath()
 shaft.lineWidth = 7
 shaft.lineCapStyle = .round
-shaft.move(to: NSPoint(x: 226, y: y))
-shaft.line(to: NSPoint(x: 300, y: y))
+shaft.move(to: NSPoint(x: 252, y: y))
+shaft.line(to: NSPoint(x: 326, y: y))
 shaft.stroke()
 let head = NSBezierPath()
-head.move(to: NSPoint(x: 296, y: y + 13))
-head.line(to: NSPoint(x: 322, y: y))
-head.line(to: NSPoint(x: 296, y: y - 13))
+head.move(to: NSPoint(x: 322, y: y + 13))
+head.line(to: NSPoint(x: 348, y: y))
+head.line(to: NSPoint(x: 322, y: y - 13))
 head.close()
 head.fill()
 

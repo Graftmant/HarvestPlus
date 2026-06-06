@@ -5,6 +5,37 @@
         <link>https://github.com/graftmant/HarvestPlus</link>
         <description>HarvestPlus update feed.</description>
         <language>en</language>
-        <!-- Release items are appended here by Scripts/build.sh on each release. -->
+        <item>
+            <title>Version 1.0.0</title>
+            <pubDate>Sat, 06 Jun 2026 18:02:37 +0000</pubDate>
+            <description><![CDATA[
+
+Initial public release.
+
+### Added
+
+- Menu-bar popover showing today's entries and the running timer at a glance.
+- Dashboards: daily, weekly, monthly, and yearly views with summary cards for
+  hours logged, target, overtime, and break usage. Always current, no reload.
+- PDF and CSV report export for any range, in two clicks.
+- Overtime calculator: per-weekday hour targets, a lunch window, and your own
+  custom non-working days, rolled up into real overtime and undertime.
+- Smart banners (optional): a reminder when a timer is left running, when you
+  go idle, or when a calendar meeting ends without a logged entry, plus
+  end-of-day and end-of-week summaries.
+- macOS Calendar integration: meetings appear alongside your time entries, and
+  any meeting can be logged as a Harvest entry in two clicks.
+- Silent automatic updates via [Sparkle](https://sparkle-project.org).
+- In-app feedback form (Settings, Feedback).
+            ]]></description>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/graftmant/HarvestPlus/releases/download/v1.0.0/HarvestPlus.app.zip"
+                sparkle:version="1.0.0"
+                sparkle:shortVersionString="1.0.0"
+                length="3523735"
+                type="application/octet-stream"
+                sparkle:edSignature="faVXiij9ensm24W9UYbw0N2KIdlCDmHqmRg8MeLE73JY8Q5unZDGC5vE47mMo0UKO02hfvbkWFfE01HTtIQqCw==" />
+        </item>
     </channel>
 </rss>

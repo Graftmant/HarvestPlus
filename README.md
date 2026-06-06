@@ -41,33 +41,29 @@ where it goes (short answer: almost nothing leaves your Mac).
 
 ## Installing HarvestPlus
 
-Open **Terminal** (`⌘-Space`, type "Terminal", enter), paste this, hit Return:
+### Option 1: Download (no Terminal)
+
+1. Download **[HarvestPlus.dmg](https://github.com/Graftmant/HarvestPlus/releases/latest/download/HarvestPlus.dmg)** (always points at the latest version).
+2. Open the downloaded `.dmg` and drag **HarvestPlus** onto the **Applications** folder.
+3. Open HarvestPlus from Applications or Launchpad. The first time, macOS asks you to confirm opening an app downloaded from the internet; click **Open**. A small icon appears in your menu bar.
+
+The app is signed with an Apple Developer ID and notarized by Apple, so there's no "unidentified developer" warning, and it updates itself automatically from then on.
+
+### Option 2: One Terminal command
+
+If you prefer the command line, paste this into **Terminal** (`⌘-Space`, type "Terminal", Return):
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Graftmant/HarvestPlus/main/Scripts/install.sh | bash
 ```
 
-No admin password needed: this installs to `~/Applications` (your user's
-private Applications folder). macOS treats `~/Applications` identically to
-`/Applications` for Launchpad, Spotlight, Dock-pinning, and launch-at-login,
-so the app works the same either way.
-
-If you'd rather install to the system-wide `/Applications` (visible to other
-users on the same Mac), append `--system`, and you'll be asked for your admin
-password once:
+No admin password needed: this installs to `~/Applications`, which macOS treats identically to `/Applications` for Launchpad, Spotlight, Dock-pinning, and launch-at-login. To install system-wide (visible to other users on the same Mac), append `--system` and you'll be asked for your admin password once:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Graftmant/HarvestPlus/main/Scripts/install.sh | bash -s -- --system
 ```
 
-Either way the script:
-
-1. Downloads `HarvestPlus.app.zip` from the latest GitHub release.
-2. Extracts it into `~/Applications/HarvestPlus.app` (or `/Applications` with
-   `--system`), replacing any previous version.
-3. Strips the `com.apple.quarantine` flag so macOS launches it without any
-   "Apple cannot verify…" Gatekeeper prompt.
-4. Launches the app. A small icon appears in your menu bar.
+The script downloads the latest release, installs it (replacing any previous version), and launches it.
 
 > The icon will be grey and show no data until you connect your Harvest
 > account – see the next section.

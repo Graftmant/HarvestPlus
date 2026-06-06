@@ -320,6 +320,44 @@ ok "Zip → $ZIP_FIXED"
 ok "Zip → $ZIP_VERSIONED"
 
 # ---------------------------------------------------------------------------
+# 5.5) Notarized .dmg (drag-to-Applications) for non-Terminal installs
+# ---------------------------------------------------------------------------
+#
+# Built from the already-stapled .app, signed with the same Developer ID
+# Application cert (no separate Installer cert needed), then notarized and
+# stapled so it opens straight from a browser download with no Gatekeeper
+# warning. The .dmg also nudges users to drag the app into /Applications,
+# which avoids macOS app translocation breaking Sparkle auto-updates.
+
+DMG_FIXED="$BUILD_DIR/${PRODUCT_NAME}.dmg"
+DMG_VERSIONED="$BUILD_DIR/${PRODUCT_NAME}-${MARKETING_VERSION}.dmg"
+DMG_STAGE="$BUILD_DIR/dmg-stage"
+
+log "Building drag-install .dmg → $DMG_FIXED"
+rm -rf "$DMG_STAGE" "$DMG_FIXED" "$DMG_VERSIONED"
+mkdir -p "$DMG_STAGE"
+/usr/bin/ditto "$APP_EXPORTED" "$DMG_STAGE/${PRODUCT_NAME}.app"
+ln -s /Applications "$DMG_STAGE/Applications"
+hdiutil create -volname "$PRODUCT_NAME" -srcfolder "$DMG_STAGE" -ov -format UDZO "$DMG_FIXED" >/dev/null \
+    || die "hdiutil failed to create the .dmg"
+rm -rf "$DMG_STAGE"
+
+codesign --force --timestamp --sign "$CODE_SIGN_IDENTITY" "$DMG_FIXED" \
+    || die "Failed to sign the .dmg"
+
+log "Notarizing .dmg (typically 1–3 min)…"
+DMG_NOTARIZE_LOG="$BUILD_DIR/notarize-dmg.log"
+if ! xcrun notarytool submit "$DMG_FIXED" --keychain-profile "$NOTARY_PROFILE" --wait > "$DMG_NOTARIZE_LOG" 2>&1; then
+    cat "$DMG_NOTARIZE_LOG" >&2
+    die "DMG notarization submission failed (full log: $DMG_NOTARIZE_LOG)"
+fi
+grep -q "status: Accepted" "$DMG_NOTARIZE_LOG" || { cat "$DMG_NOTARIZE_LOG" >&2; die "DMG notarization rejected."; }
+xcrun stapler staple "$DMG_FIXED" >/dev/null || die "DMG stapling failed."
+xcrun stapler validate "$DMG_FIXED" >/dev/null || die "DMG staple validation failed."
+cp "$DMG_FIXED" "$DMG_VERSIONED"
+ok "Notarized .dmg → $DMG_FIXED"
+
+# ---------------------------------------------------------------------------
 # 6) Sparkle: sign the release zip and (re)write appcast.xml
 # ---------------------------------------------------------------------------
 #
@@ -404,6 +442,7 @@ cat <<EOF
   HarvestPlus ${MARKETING_VERSION} (build ${BUILD_NUMBER})
   Built app     : $APP_EXPORTED
   Release asset : $ZIP_FIXED             (${SIZE_HUMAN})
+  Disk image    : $DMG_FIXED
   Versioned copy: $ZIP_VERSIONED
 
   Signed    : ${CODE_SIGN_IDENTITY}
@@ -416,7 +455,7 @@ cat <<EOF
     git tag v${MARKETING_VERSION}
     git push origin v${MARKETING_VERSION}
     gh release create v${MARKETING_VERSION} \\
-        "$ZIP_FIXED" "$ZIP_VERSIONED" \\
+        "$ZIP_FIXED" "$DMG_FIXED" "$ZIP_VERSIONED" \\
         --title "HarvestPlus ${MARKETING_VERSION}" \\
         --notes-file CHANGELOG.md
 

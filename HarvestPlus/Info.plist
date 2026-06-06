@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- ============== Privacy / TCC usage strings ============== -->
+	<key>NSCalendarsUsageDescription</key>
+	<string>HarvestPlus shows your calendar events on the daily timeline to help you track time against meetings.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>HarvestPlus shows your calendar events on the daily timeline to help you track time against meetings.</string>
+
+	<!-- ============== Sparkle auto-updater ============== -->
+	<!-- The appcast feed published by build.sh on every release. -->
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/graftmant/HarvestPlus/main/appcast.xml</string>
+
+	<!-- Public half of the EdDSA keypair Sparkle uses to verify update
+	     payloads. The private key lives in the maintainer's keychain and
+	     never leaves the release machine. -->
+	<key>SUPublicEDKey</key>
+	<string>REPLACE_WITH_PUBLIC_APP_ED_PUBLIC_KEY</string>
+
+	<!-- Required for sandboxed apps: tells Sparkle to launch its installer
+	     out-of-process via the InstallerLauncher XPC service bundled inside
+	     Sparkle.framework. -->
+	<key>SUEnableInstallerLauncherService</key>
+	<true/>
+
+	<!-- Background auto-update behaviour. -->
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUScheduledCheckInterval</key>
+	<integer>86400</integer>
+	<key>SUAutomaticallyUpdate</key>
+	<true/>
+
+	<!-- ============== OAuth callback (reserved) ============== -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.harvestplus.oauth</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>harvestplus</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

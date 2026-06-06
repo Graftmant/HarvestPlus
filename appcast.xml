@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+    <channel>
+        <title>HarvestPlus</title>
+        <link>https://github.com/graftmant/HarvestPlus</link>
+        <description>HarvestPlus update feed.</description>
+        <language>en</language>
+        <!-- Release items are appended here by Scripts/build.sh on each release. -->
+    </channel>
+</rss>

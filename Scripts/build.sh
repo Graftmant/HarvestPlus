@@ -320,27 +320,36 @@ ok "Zip → $ZIP_FIXED"
 ok "Zip → $ZIP_VERSIONED"
 
 # ---------------------------------------------------------------------------
-# 5.5) Notarized .dmg (drag-to-Applications) for non-Terminal installs
+# 5.5) Styled, notarized .dmg (drag-to-Applications) for non-Terminal installs
 # ---------------------------------------------------------------------------
 #
-# Built from the already-stapled .app, signed with the same Developer ID
-# Application cert (no separate Installer cert needed), then notarized and
-# stapled so it opens straight from a browser download with no Gatekeeper
-# warning. The .dmg also nudges users to drag the app into /Applications,
-# which avoids macOS app translocation breaking Sparkle auto-updates.
+# Built with dmgbuild from the already-stapled .app: a 600x400 window with a
+# background image and 128px icons (app on the left, Applications on the
+# right). Signed with the same Developer ID Application cert (no separate
+# Installer cert needed), then notarized and stapled so it opens straight from
+# a browser download with no Gatekeeper warning. The drag-to-Applications
+# layout also nudges users to install into /Applications, which avoids macOS
+# app translocation breaking Sparkle auto-updates. Background + layout live in
+# Scripts/dmg-assets/.
 
 DMG_FIXED="$BUILD_DIR/${PRODUCT_NAME}.dmg"
 DMG_VERSIONED="$BUILD_DIR/${PRODUCT_NAME}-${MARKETING_VERSION}.dmg"
-DMG_STAGE="$BUILD_DIR/dmg-stage"
 
-log "Building drag-install .dmg → $DMG_FIXED"
-rm -rf "$DMG_STAGE" "$DMG_FIXED" "$DMG_VERSIONED"
-mkdir -p "$DMG_STAGE"
-/usr/bin/ditto "$APP_EXPORTED" "$DMG_STAGE/${PRODUCT_NAME}.app"
-ln -s /Applications "$DMG_STAGE/Applications"
-hdiutil create -volname "$PRODUCT_NAME" -srcfolder "$DMG_STAGE" -ov -format UDZO "$DMG_FIXED" >/dev/null \
-    || die "hdiutil failed to create the .dmg"
-rm -rf "$DMG_STAGE"
+# dmgbuild writes the window layout directly (no Finder/AppleScript). Install
+# it on first use; it's a small pure-Python package.
+if ! python3 -c 'import dmgbuild' 2>/dev/null; then
+    log "Installing dmgbuild (one-time)…"
+    python3 -m pip install --user --quiet dmgbuild || die "Failed to install dmgbuild (needed for the styled .dmg)"
+fi
+
+log "Building styled drag-install .dmg → $DMG_FIXED"
+rm -f "$DMG_FIXED" "$DMG_VERSIONED"
+hdiutil detach "/Volumes/${PRODUCT_NAME}" >/dev/null 2>&1 || true
+python3 - "$DMG_FIXED" "$APP_EXPORTED" "$SCRIPT_DIR/dmg-assets/dmg-settings.py" "$SCRIPT_DIR/dmg-assets/background.png" "$PRODUCT_NAME" <<'PY' || die "dmgbuild failed to create the .dmg"
+import sys, dmgbuild
+out, app, settings, bg, vol = sys.argv[1:6]
+dmgbuild.build_dmg(out, vol, settings_file=settings, defines={"app": app, "background": bg})
+PY
 
 codesign --force --timestamp --sign "$CODE_SIGN_IDENTITY" "$DMG_FIXED" \
     || die "Failed to sign the .dmg"

@@ -339,7 +339,7 @@ SPARKLE_BIN="$(find "$HOME/Library/Developer/Xcode/DerivedData" \
 [ -d "$SPARKLE_BIN" ] || die "Couldn't find Sparkle's bin/ in DerivedData. Open the project in Xcode once so SPM caches its artifacts."
 
 log "Signing release zip with Sparkle's EdDSA key…"
-SIGN_OUTPUT="$("$SPARKLE_BIN/sign_update" "$ZIP_FIXED")"
+SIGN_OUTPUT="$("$SPARKLE_BIN/sign_update" --account HarvestPlus-Public "$ZIP_FIXED")"
 # sign_update prints a fragment like:
 #   sparkle:edSignature="…" length="…"
 ED_SIG="$(printf '%s' "$SIGN_OUTPUT" | sed -E 's/.*sparkle:edSignature="([^"]+)".*/\1/')"

@@ -17,7 +17,7 @@
 	     payloads. The private key lives in the maintainer's keychain and
 	     never leaves the release machine. -->
 	<key>SUPublicEDKey</key>
-	<string>REPLACE_WITH_PUBLIC_APP_ED_PUBLIC_KEY</string>
+	<string>ZlhksAgw+vkUgscz3iFrgbYlKUGgbiMz4BDKWeC+l5Y=</string>
 
 	<!-- Required for sandboxed apps: tells Sparkle to launch its installer
 	     out-of-process via the InstallerLauncher XPC service bundled inside

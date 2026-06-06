@@ -27,7 +27,7 @@ enum FeedbackService {
 
     /// Public Web3Forms access key. Tied to the maintainer's inbox on
     /// the Web3Forms side. Safe to embed; not a secret.
-    static let accessKey = "REPLACE_WITH_PUBLIC_WEB3FORMS_KEY"
+    static let accessKey = "7e6806b4-e02a-48f1-b74b-1b4469d6678e"
 
     private static let endpoint = URL(string: "https://api.web3forms.com/submit")!
 

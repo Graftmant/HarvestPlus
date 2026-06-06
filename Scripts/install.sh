@@ -5,10 +5,10 @@
 # Usage (copy-paste into Terminal):
 #
 #   Per-user install (default, no admin password needed):
-#     curl -fsSL https://raw.githubusercontent.com/graftmant/HarvestPlus/main/Scripts/install.sh | bash
+#     curl -fsSL https://raw.githubusercontent.com/Graftmant/HarvestPlus/main/Scripts/install.sh | bash
 #
 #   System-wide install (/Applications, requires admin password):
-#     curl -fsSL https://raw.githubusercontent.com/graftmant/HarvestPlus/main/Scripts/install.sh | bash -s -- --system
+#     curl -fsSL https://raw.githubusercontent.com/Graftmant/HarvestPlus/main/Scripts/install.sh | bash -s -- --system
 #
 # What it does:
 #   1. Downloads the latest HarvestPlus.app.zip from GitHub Releases.
@@ -43,7 +43,7 @@
 
 set -euo pipefail
 
-OWNER="graftmant"
+OWNER="Graftmant"
 REPO="HarvestPlus"
 APP_NAME="HarvestPlus"
 

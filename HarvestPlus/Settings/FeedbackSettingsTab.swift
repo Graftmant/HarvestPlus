@@ -64,7 +64,7 @@ struct FeedbackSettingsTab: View {
                 Text("What we collect:")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
-                Link("Privacy Policy", destination: URL(string: "https://github.com/graftmant/HarvestPlus/blob/main/PRIVACY.md")!)
+                Link("Privacy Policy", destination: URL(string: "https://github.com/Graftmant/HarvestPlus/blob/main/PRIVACY.md")!)
                     .font(.caption)
             }
         }

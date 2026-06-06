@@ -153,7 +153,7 @@ On a second Mac (or a Mac that's never run HarvestPlus before), open
 Terminal and paste:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/graftmant/HarvestPlus/main/Scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Graftmant/HarvestPlus/main/Scripts/install.sh | bash
 ```
 
 Expected: the script prints progress, launches the app, a menu-bar icon

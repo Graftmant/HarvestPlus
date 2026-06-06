@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
     <channel>
         <title>HarvestPlus</title>
-        <link>https://github.com/graftmant/HarvestPlus</link>
+        <link>https://github.com/Graftmant/HarvestPlus</link>
         <description>HarvestPlus update feed.</description>
         <language>en</language>
         <item>
@@ -30,7 +30,7 @@ Initial public release.
             ]]></description>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://github.com/graftmant/HarvestPlus/releases/download/v1.0.0/HarvestPlus.app.zip"
+                url="https://github.com/Graftmant/HarvestPlus/releases/download/v1.0.0/HarvestPlus.app.zip"
                 sparkle:version="1.0.0"
                 sparkle:shortVersionString="1.0.0"
                 length="3523735"

@@ -11,7 +11,7 @@
 	<!-- ============== Sparkle auto-updater ============== -->
 	<!-- The appcast feed published by build.sh on every release. -->
 	<key>SUFeedURL</key>
-	<string>https://raw.githubusercontent.com/graftmant/HarvestPlus/main/appcast.xml</string>
+	<string>https://raw.githubusercontent.com/Graftmant/HarvestPlus/main/appcast.xml</string>
 
 	<!-- Public half of the EdDSA keypair Sparkle uses to verify update
 	     payloads. The private key lives in the maintainer's keychain and

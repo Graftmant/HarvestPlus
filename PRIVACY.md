@@ -62,7 +62,7 @@ HarvestPlus makes HTTPS requests to four endpoints, and **nothing else**:
 - **When:** once every 24 h while the app is running (Sparkle's auto-check),
   or when you click "Check for Updates" in Settings.
 - **What:** a GET request for the
-  [appcast.xml](https://raw.githubusercontent.com/graftmant/HarvestPlus/main/appcast.xml)
+  [appcast.xml](https://raw.githubusercontent.com/Graftmant/HarvestPlus/main/appcast.xml)
   file, and (if a newer release exists) a download of the new app zip.
 - **Who sees it:** GitHub, Inc. They will know your IP address and that
   you fetched a HarvestPlus update file.
@@ -177,4 +177,4 @@ be called out in release notes.
 
 Bug reports, privacy questions, or anything else: use the in-app feedback
 form (Settings → Feedback) or open an issue on the
-[GitHub repository](https://github.com/graftmant/HarvestPlus).
+[GitHub repository](https://github.com/Graftmant/HarvestPlus).

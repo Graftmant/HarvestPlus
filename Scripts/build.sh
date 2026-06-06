@@ -349,7 +349,7 @@ ZIP_LENGTH="$(printf '%s' "$SIGN_OUTPUT" | sed -E 's/.*length="([^"]+)".*/\1/')"
 
 APPCAST="$REPO_ROOT/appcast.xml"
 PUB_DATE="$(date -u +'%a, %d %b %Y %H:%M:%S +0000')"
-RELEASE_URL="https://github.com/graftmant/HarvestPlus/releases/download/v${MARKETING_VERSION}/HarvestPlus.app.zip"
+RELEASE_URL="https://github.com/Graftmant/HarvestPlus/releases/download/v${MARKETING_VERSION}/HarvestPlus.app.zip"
 
 # Extract the CHANGELOG section for this version, if present. The appcast
 # carries it inside CDATA so Sparkle's release-notes pane can render it.
@@ -368,7 +368,7 @@ cat > "$APPCAST" <<EOF
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
     <channel>
         <title>HarvestPlus</title>
-        <link>https://github.com/graftmant/HarvestPlus</link>
+        <link>https://github.com/Graftmant/HarvestPlus</link>
         <description>HarvestPlus update feed.</description>
         <language>en</language>
         <item>
@@ -410,7 +410,7 @@ cat <<EOF
   Notarized : yes (ticket stapled)
 
   Users install with one Terminal command:
-    curl -fsSL https://raw.githubusercontent.com/graftmant/HarvestPlus/main/Scripts/install.sh | bash
+    curl -fsSL https://raw.githubusercontent.com/Graftmant/HarvestPlus/main/Scripts/install.sh | bash
 
   Next step – publish on GitHub:
     git tag v${MARKETING_VERSION}

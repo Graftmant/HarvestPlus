@@ -44,7 +44,7 @@ where it goes (short answer: almost nothing leaves your Mac).
 Open **Terminal** (`⌘-Space`, type "Terminal", enter), paste this, hit Return:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/graftmant/HarvestPlus/main/Scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Graftmant/HarvestPlus/main/Scripts/install.sh | bash
 ```
 
 No admin password needed: this installs to `~/Applications` (your user's
@@ -57,7 +57,7 @@ users on the same Mac), append `--system`, and you'll be asked for your admin
 password once:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/graftmant/HarvestPlus/main/Scripts/install.sh | bash -s -- --system
+curl -fsSL https://raw.githubusercontent.com/Graftmant/HarvestPlus/main/Scripts/install.sh | bash -s -- --system
 ```
 
 Either way the script:
@@ -254,7 +254,7 @@ constants rather than constructed per-frame.
 **Updates** (`Updates/UpdateChecker.swift`)
 - A thin wrapper around Sparkle 2's `SPUStandardUpdaterController`.
 - Polls the appcast at
-  `raw.githubusercontent.com/graftmant/HarvestPlus/main/appcast.xml` once per
+  `raw.githubusercontent.com/Graftmant/HarvestPlus/main/appcast.xml` once per
   24h (and manually on demand).
 - Each release zip is signed with an EdDSA key on the release machine; Sparkle
   verifies the signature against the public key in `Info.plist` before
@@ -339,7 +339,7 @@ Requirements:
 - A Developer ID for signed builds (not needed for local runs).
 
 ```bash
-git clone https://github.com/graftmant/HarvestPlus.git
+git clone https://github.com/Graftmant/HarvestPlus.git
 cd HarvestPlus
 open HarvestPlus.xcodeproj
 # Press ⌘R to run in debug. The app appears in the menu bar.
@@ -356,6 +356,6 @@ inside `HarvestPlus.app/Contents/Resources`.
 
 ## Contact
 
-Maintainer: Razvan Politic – [@graftmant](https://github.com/graftmant)
+Maintainer: Razvan Politic – [@martin-graftmant](https://github.com/martin-graftmant)
 
 Bug reports and feature requests: open an issue on this repo.

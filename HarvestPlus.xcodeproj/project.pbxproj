@@ -27,6 +27,7 @@
 			membershipExceptions = (
 				build.sh,
 				install.sh,
+				dmg-assets/make-background.swift,
 			);
 			target = 88E087832F8EB7B200FF8DF7 /* HarvestPlus */;
 		};
